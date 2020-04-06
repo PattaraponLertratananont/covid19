@@ -49,14 +49,25 @@ showDetail(BuildContext context, cv, tl) {
                               fontSize: MediaQuery.of(context).size.width / 35,
                             ),
                           ),
-                          Text(
-                            numFormat.format(covid.first['cases']).toString(),
-                            style: TextStyle(
-                              color: cl_yellow,
-                              fontWeight: FontWeight.w700,
-                              fontSize: MediaQuery.of(context).size.width / 18,
-                            ),
-                          ),
+                          data.isEmpty
+                              ? Text(
+                                  numFormat.format(covid.first['cases']).toString(),
+                                  style: TextStyle(
+                                    color: cl_yellow,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: MediaQuery.of(context).size.width / 18,
+                                  ),
+                                )
+                              : Text(
+                                  covid.first['cases'] > data[0]['cases']
+                                      ? numFormat.format(covid.first['cases']).toString()
+                                      : numFormat.format(data[0]['cases']).toString(),
+                                  style: TextStyle(
+                                    color: cl_yellow,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: MediaQuery.of(context).size.width / 18,
+                                  ),
+                                ),
                           data.isEmpty
                               ? Container()
                               : Container(
@@ -78,7 +89,9 @@ showDetail(BuildContext context, cv, tl) {
                                               color: Colors.black,
                                             ),
                                             Text(
-                                              numFormat.format(covid.first['cases'] - data[0]['cases']),
+                                              covid.first['cases'] > data[0]['cases']
+                                                  ? numFormat.format(covid.first['cases'] - data[0]['cases'])
+                                                  : numFormat.format(data[0]['cases'] - covid.first['cases']),
                                               style: TextStyle(
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.w600,
@@ -109,14 +122,25 @@ showDetail(BuildContext context, cv, tl) {
                               fontSize: MediaQuery.of(context).size.width / 35,
                             ),
                           ),
-                          Text(
-                            numFormat.format(covid.first['active']).toString(),
-                            style: TextStyle(
-                              color: cl_blue,
-                              fontWeight: FontWeight.w700,
-                              fontSize: MediaQuery.of(context).size.width / 18,
-                            ),
-                          ),
+                          data.isEmpty
+                              ? Text(
+                                  numFormat.format(covid.first['active']).toString(),
+                                  style: TextStyle(
+                                    color: cl_blue,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: MediaQuery.of(context).size.width / 18,
+                                  ),
+                                )
+                              : Text(
+                                  covid.first['cases'] > (data[0]['cases'] - data[0]['recovered'] - data[0]['deaths'])
+                                      ? numFormat.format(covid.first['active']).toString()
+                                      : numFormat.format(data[0]['cases'] - data[0]['recovered'] - data[0]['deaths']).toString(),
+                                  style: TextStyle(
+                                    color: cl_blue,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: MediaQuery.of(context).size.width / 18,
+                                  ),
+                                ),
                           data.isEmpty
                               ? Container()
                               : Container(
@@ -138,8 +162,11 @@ showDetail(BuildContext context, cv, tl) {
                                               color: Colors.black,
                                             ),
                                             Text(
-                                              numFormat.format((covid.first['cases'] - covid.first['recovered'] - covid.first['deaths']) -
-                                                  (data[0]['cases'] - data[0]['recovered'] - data[0]['deaths'])),
+                                              covid.first['active'] > (data[0]['cases'] - data[0]['recovered'] - data[0]['deaths'])
+                                                  ? numFormat
+                                                      .format(covid.first['active'] - (data[0]['cases'] - data[0]['recovered'] - data[0]['deaths']))
+                                                  : numFormat
+                                                      .format((data[0]['cases'] - data[0]['recovered'] - data[0]['deaths']) - covid.first['active']),
                                               style: TextStyle(
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.w600,
@@ -175,14 +202,25 @@ showDetail(BuildContext context, cv, tl) {
                               fontSize: MediaQuery.of(context).size.width / 35,
                             ),
                           ),
-                          Text(
-                            numFormat.format(covid.first['recovered']).toString(),
-                            style: TextStyle(
-                              color: cl_green,
-                              fontWeight: FontWeight.w700,
-                              fontSize: MediaQuery.of(context).size.width / 18,
-                            ),
-                          ),
+                          data.isEmpty
+                              ? Text(
+                                  numFormat.format(covid.first['recovered']).toString(),
+                                  style: TextStyle(
+                                    color: cl_green,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: MediaQuery.of(context).size.width / 18,
+                                  ),
+                                )
+                              : Text(
+                                  covid.first['recovered'] > data[0]['recovered']
+                                      ? numFormat.format(covid.first['recovered']).toString()
+                                      : numFormat.format(data[0]['recovered']).toString(),
+                                  style: TextStyle(
+                                    color: cl_green,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: MediaQuery.of(context).size.width / 18,
+                                  ),
+                                ),
                           data.isEmpty
                               ? Container()
                               : Container(
@@ -204,7 +242,9 @@ showDetail(BuildContext context, cv, tl) {
                                               color: Colors.black,
                                             ),
                                             Text(
-                                              numFormat.format(covid.first['recovered'] - data[0]['recovered']),
+                                              covid.first['recovered'] > data[0]['recovered']
+                                                  ? numFormat.format(covid.first['recovered'] - data[0]['recovered'])
+                                                  : numFormat.format(data[0]['recovered'] - covid.first['recovered']),
                                               style: TextStyle(
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.w600,
@@ -235,14 +275,25 @@ showDetail(BuildContext context, cv, tl) {
                               fontSize: MediaQuery.of(context).size.width / 35,
                             ),
                           ),
-                          Text(
-                            numFormat.format(covid.first['deaths']).toString(),
-                            style: TextStyle(
-                              color: cl_red,
-                              fontWeight: FontWeight.w700,
-                              fontSize: MediaQuery.of(context).size.width / 18,
-                            ),
-                          ),
+                          data.isEmpty
+                              ? Text(
+                                  numFormat.format(covid.first['deaths']).toString(),
+                                  style: TextStyle(
+                                    color: cl_red,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: MediaQuery.of(context).size.width / 18,
+                                  ),
+                                )
+                              : Text(
+                                  covid.first['deaths'] > data[0]['deaths']
+                                      ? numFormat.format(covid.first['deaths']).toString()
+                                      : numFormat.format(data[0]['deaths']).toString(),
+                                  style: TextStyle(
+                                    color: cl_red,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: MediaQuery.of(context).size.width / 18,
+                                  ),
+                                ),
                           data.isEmpty
                               ? Container()
                               : Container(
@@ -264,7 +315,9 @@ showDetail(BuildContext context, cv, tl) {
                                               color: Colors.black,
                                             ),
                                             Text(
-                                              numFormat.format(covid.first['deaths'] - data[0]['deaths']),
+                                              covid.first['deaths'] > data[0]['deaths']
+                                                  ? numFormat.format(covid.first['deaths'] - data[0]['deaths'])
+                                                  : numFormat.format(data[0]['deaths'] - covid.first['deaths']),
                                               style: TextStyle(
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.w600,
