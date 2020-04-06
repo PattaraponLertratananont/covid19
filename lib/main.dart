@@ -265,7 +265,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  numFormat.format(dataCovid[0]['cases']).toString(),
+                                                  dataCovid[0]['cases'] >
+                                                          dataGlobal[0][DateFormat('yyyy-M-d').format(DateTime.now().add(Duration(days: -1)))]
+                                                              ['cases']
+                                                      ? numFormat.format(dataCovid[0]['cases']).toString()
+                                                      : numFormat.format(dataGlobal[0]
+                                                          [DateFormat('yyyy-M-d').format(DateTime.now().add(Duration(days: -1)))]['cases']),
                                                   style: TextStyle(
                                                     color: cl_yellow,
                                                     fontWeight: FontWeight.w700,
@@ -289,12 +294,20 @@ class _MyHomePageState extends State<MyHomePage> {
                                                               color: Colors.black,
                                                             ),
                                                             Text(
-                                                              numFormat
-                                                                  .format((dataCovid[0]['cases'] -
+                                                              dataCovid[0]['cases'] >
                                                                       dataGlobal[0]
                                                                               [DateFormat('yyyy-M-d').format(DateTime.now().add(Duration(days: -1)))]
-                                                                          ['cases']))
-                                                                  .toString(),
+                                                                          ['cases']
+                                                                  ? numFormat
+                                                                      .format((dataCovid[0]['cases'] -
+                                                                          dataGlobal[0][DateFormat('yyyy-M-d')
+                                                                              .format(DateTime.now().add(Duration(days: -1)))]['cases']))
+                                                                      .toString()
+                                                                  : numFormat
+                                                                      .format((dataGlobal[0][DateFormat('yyyy-M-d')
+                                                                              .format(DateTime.now().add(Duration(days: -1)))]['cases'] -
+                                                                          dataCovid[0]['cases']))
+                                                                      .toString(),
                                                               style: TextStyle(
                                                                 color: Colors.black,
                                                                 fontSize: MediaQuery.of(context).size.width / 30,
@@ -332,7 +345,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  numFormat.format(dataCovid[0]['recovered']).toString(),
+                                                  dataCovid[0]['recovered'] >
+                                                          dataGlobal[0][DateFormat('yyyy-M-d').format(DateTime.now().add(Duration(days: -1)))]
+                                                              ['recovered']
+                                                      ? numFormat.format(dataCovid[0]['recovered']).toString()
+                                                      : numFormat.format(dataGlobal[0]
+                                                          [DateFormat('yyyy-M-d').format(DateTime.now().add(Duration(days: -1)))]['recovered']),
                                                   style: TextStyle(
                                                     color: cl_green,
                                                     fontWeight: FontWeight.w700,
@@ -356,12 +374,20 @@ class _MyHomePageState extends State<MyHomePage> {
                                                               color: Colors.black,
                                                             ),
                                                             Text(
-                                                              numFormat
-                                                                  .format((dataCovid[0]['recovered'] -
+                                                              dataCovid[0]['recovered'] >
                                                                       dataGlobal[0]
-                                                                              [DateFormat('yyyy-M-d').format(DateTime.now().add(Duration(days: -2)))]
-                                                                          ['recovered']))
-                                                                  .toString(),
+                                                                              [DateFormat('yyyy-M-d').format(DateTime.now().add(Duration(days: -1)))]
+                                                                          ['recovered']
+                                                                  ? numFormat
+                                                                      .format((dataCovid[0]['recovered'] -
+                                                                          dataGlobal[0][DateFormat('yyyy-M-d')
+                                                                              .format(DateTime.now().add(Duration(days: -1)))]['recovered']))
+                                                                      .toString()
+                                                                  : numFormat
+                                                                      .format((dataGlobal[0][DateFormat('yyyy-M-d')
+                                                                              .format(DateTime.now().add(Duration(days: -1)))]['recovered'] -
+                                                                          dataCovid[0]['recovered']))
+                                                                      .toString(),
                                                               style: TextStyle(
                                                                 color: Colors.black,
                                                                 fontSize: MediaQuery.of(context).size.width / 30,
@@ -405,9 +431,34 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  numFormat
-                                                      .format((dataCovid[0]['cases'] - dataCovid[0]['deaths'] - dataCovid[0]['recovered']))
-                                                      .toString(),
+                                                  (dataCovid[0]['cases'] - dataCovid[0]['deaths'] - dataCovid[0]['recovered']) >
+                                                          ((dataCovid[0]['cases']) -
+                                                              (dataCovid[0]['deaths']) -
+                                                              (dataCovid[0]['recovered']) -
+                                                              ((dataGlobal[0][DateFormat('yyyy-M-d').format(DateTime.now().add(Duration(days: -1)))]
+                                                                      ['cases']) -
+                                                                  (dataGlobal[0]
+                                                                          [DateFormat('yyyy-M-d').format(DateTime.now().add(Duration(days: -1)))]
+                                                                      ['deaths']) -
+                                                                  (dataGlobal[0]
+                                                                          [DateFormat('yyyy-M-d').format(DateTime.now().add(Duration(days: -1)))]
+                                                                      ['recovered'])))
+                                                      ? numFormat
+                                                          .format((dataCovid[0]['cases'] - dataCovid[0]['deaths'] - dataCovid[0]['recovered']))
+                                                          .toString()
+                                                      : numFormat
+                                                          .format(((dataCovid[0]['cases']) -
+                                                              (dataCovid[0]['deaths']) -
+                                                              (dataCovid[0]['recovered']) -
+                                                              ((dataGlobal[0][DateFormat('yyyy-M-d').format(DateTime.now().add(Duration(days: -1)))]
+                                                                      ['cases']) -
+                                                                  (dataGlobal[0]
+                                                                          [DateFormat('yyyy-M-d').format(DateTime.now().add(Duration(days: -1)))]
+                                                                      ['deaths']) -
+                                                                  (dataGlobal[0]
+                                                                          [DateFormat('yyyy-M-d').format(DateTime.now().add(Duration(days: -1)))]
+                                                                      ['recovered']))))
+                                                          .toString(),
                                                   style: TextStyle(
                                                     color: cl_blue,
                                                     fontWeight: FontWeight.w700,
@@ -479,7 +530,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  numFormat.format(dataCovid[0]['deaths']).toString(),
+                                                  dataCovid[0]['deaths'] >
+                                                          dataGlobal[0][DateFormat('yyyy-M-d').format(DateTime.now().add(Duration(days: -1)))]
+                                                              ['deaths']
+                                                      ? numFormat.format(dataCovid[0]['deaths']).toString()
+                                                      : numFormat.format(dataGlobal[0]
+                                                          [DateFormat('yyyy-M-d').format(DateTime.now().add(Duration(days: -1)))]['deaths']),
                                                   style: TextStyle(
                                                     color: cl_red,
                                                     fontWeight: FontWeight.w700,
@@ -503,12 +559,20 @@ class _MyHomePageState extends State<MyHomePage> {
                                                               color: Colors.black,
                                                             ),
                                                             Text(
-                                                              numFormat
-                                                                  .format((dataCovid[0]['deaths'] -
+                                                              dataCovid[0]['deaths'] >
                                                                       dataGlobal[0]
                                                                               [DateFormat('yyyy-M-d').format(DateTime.now().add(Duration(days: -1)))]
-                                                                          ['deaths']))
-                                                                  .toString(),
+                                                                          ['deaths']
+                                                                  ? numFormat
+                                                                      .format((dataCovid[0]['deaths'] -
+                                                                          dataGlobal[0][DateFormat('yyyy-M-d')
+                                                                              .format(DateTime.now().add(Duration(days: -1)))]['deaths']))
+                                                                      .toString()
+                                                                  : numFormat
+                                                                      .format((dataGlobal[0][DateFormat('yyyy-M-d')
+                                                                              .format(DateTime.now().add(Duration(days: -1)))]['deaths'] -
+                                                                          dataCovid[0]['deaths']))
+                                                                      .toString(),
                                                               style: TextStyle(
                                                                 color: Colors.black,
                                                                 fontSize: MediaQuery.of(context).size.width / 30,
@@ -549,23 +613,23 @@ class _MyHomePageState extends State<MyHomePage> {
                             fontSize: MediaQuery.of(context).size.width / 23,
                           ),
                         ),
-                        // Text(
-                        //   thailandTimeline.isEmpty
-                        //       ? 'วัน-เดือน-ปี'
-                        //       : dateFormat
-                        //           .format(
-                        //             DateTime(
-                        //               int.parse(thailandTimeline[0]['data']['timeline'].last['date'].toString().split('-')[0]) + 543,
-                        //               int.parse(thailandTimeline[0]['data']['timeline'].last['date'].toString().split('-')[1]),
-                        //               int.parse(thailandTimeline[0]['data']['timeline'].last['date'].toString().split('-')[2]),
-                        //             ),
-                        //           )
-                        //           .toString(),
-                        //   style: TextStyle(
-                        //     color: Colors.white,
-                        //     fontSize: MediaQuery.of(context).size.width / 27,
-                        //   ),
-                        // ),
+                        Text(
+                          thailandTimeline.isEmpty
+                              ? 'วัน-เดือน-ปี'
+                              : dateFormat
+                                  .format(
+                                    DateTime(
+                                      int.parse(thailandTimeline[0]['data']['timeline'].last['date'].toString().split('-')[0]) + 543,
+                                      int.parse(thailandTimeline[0]['data']['timeline'].last['date'].toString().split('-')[1]),
+                                      int.parse(thailandTimeline[0]['data']['timeline'].last['date'].toString().split('-')[2]) + 1,
+                                    ),
+                                  )
+                                  .toString(),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: MediaQuery.of(context).size.width / 27,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -604,7 +668,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                               ),
                                             ),
                                             Text(
-                                              numFormat.format(thailandCovid[0]['cases']).toString(),
+                                              thailandCovid[0]['cases'] > thailandTimeline[0]['data']['timeline'].last['cases']
+                                                  ? numFormat.format(thailandCovid[0]['cases']).toString()
+                                                  : numFormat.format(thailandTimeline[0]['data']['timeline'].last['cases']).toString(),
                                               style: TextStyle(
                                                 color: cl_yellow,
                                                 fontWeight: FontWeight.w700,
@@ -633,10 +699,15 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     ),
                                                     Text(
                                                       'เพิ่มขึ้น ' +
-                                                          numFormat
-                                                              .format(
-                                                                  (thailandCovid[0]['cases'] - thailandTimeline[0]['data']['timeline'].last['cases']))
-                                                              .toString(),
+                                                          (thailandCovid[0]['cases'] > thailandTimeline[0]['data']['timeline'].last['cases']
+                                                              ? numFormat
+                                                                  .format((thailandCovid[0]['cases'] -
+                                                                      thailandTimeline[0]['data']['timeline'].last['cases']))
+                                                                  .toString()
+                                                              : numFormat
+                                                                  .format((thailandTimeline[0]['data']['timeline'].last['cases']) -
+                                                                      thailandCovid[0]['cases'])
+                                                                  .toString()),
                                                       style: TextStyle(
                                                         color: Colors.black,
                                                         fontWeight: FontWeight.w600,
@@ -677,7 +748,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                             ),
                                           ),
                                           Text(
-                                            numFormat.format(thailandCovid[0]['active']).toString(),
+                                            thailandCovid[0]['active'] >
+                                                    (thailandTimeline[0]['data']['timeline'].last['cases'] -
+                                                        thailandTimeline[0]['data']['timeline'].last['recovered'] -
+                                                        thailandTimeline[0]['data']['timeline'].last['deaths'])
+                                                ? numFormat.format(thailandCovid[0]['active']).toString()
+                                                : numFormat.format(thailandTimeline[0]['data']['timeline'].last['recovered']).toString(),
                                             style: TextStyle(
                                               color: cl_blue,
                                               fontWeight: FontWeight.w700,
@@ -703,14 +779,22 @@ class _MyHomePageState extends State<MyHomePage> {
                                                         color: Colors.black,
                                                       ),
                                                       Text(
-                                                        numFormat
-                                                            .format(((thailandCovid[0]['cases'] -
-                                                                    thailandCovid[0]['recovered'] -
-                                                                    thailandCovid[0]['deaths']) -
+                                                        thailandCovid[0]['active'] >
                                                                 (thailandTimeline[0]['data']['timeline'].last['cases'] -
                                                                     thailandTimeline[0]['data']['timeline'].last['recovered'] -
-                                                                    thailandTimeline[0]['data']['timeline'].last['deaths'])))
-                                                            .toString(),
+                                                                    thailandTimeline[0]['data']['timeline'].last['deaths'])
+                                                            ? numFormat
+                                                                .format((thailandCovid[0]['active'] -
+                                                                    (thailandTimeline[0]['data']['timeline'].last['cases'] -
+                                                                        thailandTimeline[0]['data']['timeline'].last['recovered'] -
+                                                                        thailandTimeline[0]['data']['timeline'].last['deaths'])))
+                                                                .toString()
+                                                            : numFormat
+                                                                .format(((thailandTimeline[0]['data']['timeline'].last['cases'] -
+                                                                        thailandTimeline[0]['data']['timeline'].last['recovered'] -
+                                                                        thailandTimeline[0]['data']['timeline'].last['deaths']) -
+                                                                    thailandCovid[0]['active']))
+                                                                .toString(),
                                                         style: TextStyle(
                                                           color: Colors.black,
                                                           fontWeight: FontWeight.w600,
@@ -747,7 +831,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                             ),
                                           ),
                                           Text(
-                                            numFormat.format(thailandCovid[0]['recovered']).toString(),
+                                            thailandCovid[0]['recovered'] > thailandTimeline[0]['data']['timeline'].last['recovered']
+                                                ? numFormat.format(thailandCovid[0]['recovered']).toString()
+                                                : numFormat.format(thailandTimeline[0]['data']['timeline'].last['recovered']).toString(),
                                             style: TextStyle(
                                               color: cl_green,
                                               fontWeight: FontWeight.w700,
@@ -773,10 +859,15 @@ class _MyHomePageState extends State<MyHomePage> {
                                                         color: Colors.black,
                                                       ),
                                                       Text(
-                                                        numFormat
-                                                            .format((thailandCovid[0]['recovered'] -
-                                                                thailandTimeline[0]['data']['timeline'].last['recovered']))
-                                                            .toString(),
+                                                        thailandCovid[0]['recovered'] > thailandTimeline[0]['data']['timeline'].last['recovered']
+                                                            ? numFormat
+                                                                .format((thailandCovid[0]['recovered'] -
+                                                                    thailandTimeline[0]['data']['timeline'].last['recovered']))
+                                                                .toString()
+                                                            : numFormat
+                                                                .format((thailandTimeline[0]['data']['timeline'].last['recovered']) -
+                                                                    thailandCovid[0]['recovered'])
+                                                                .toString(),
                                                         style: TextStyle(
                                                           color: Colors.black,
                                                           fontWeight: FontWeight.w600,
@@ -813,7 +904,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                             ),
                                           ),
                                           Text(
-                                            numFormat.format(thailandCovid[0]['deaths']).toString(),
+                                            thailandCovid[0]['deaths'] > thailandTimeline[0]['data']['timeline'].last['deaths']
+                                                ? numFormat.format(thailandCovid[0]['deaths']).toString()
+                                                : numFormat.format(thailandTimeline[0]['data']['timeline'].last['deaths']).toString(),
                                             style: TextStyle(
                                               color: cl_red,
                                               fontWeight: FontWeight.w700,
@@ -839,10 +932,15 @@ class _MyHomePageState extends State<MyHomePage> {
                                                         color: Colors.black,
                                                       ),
                                                       Text(
-                                                        numFormat
-                                                            .format(
-                                                                (thailandCovid[0]['deaths'] - thailandTimeline[0]['data']['timeline'].last['deaths']))
-                                                            .toString(),
+                                                        thailandCovid[0]['deaths'] > thailandTimeline[0]['data']['timeline'].last['deaths']
+                                                            ? numFormat
+                                                                .format((thailandCovid[0]['deaths'] -
+                                                                    thailandTimeline[0]['data']['timeline'].last['deaths']))
+                                                                .toString()
+                                                            : numFormat
+                                                                .format((thailandTimeline[0]['data']['timeline'].last['deaths']) -
+                                                                    thailandCovid[0]['deaths'])
+                                                                .toString(),
                                                         style: TextStyle(
                                                           color: Colors.black,
                                                           fontWeight: FontWeight.w600,
