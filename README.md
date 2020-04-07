@@ -8,8 +8,8 @@
 - Ranking Status cases, active, recovered and deaths
 - Search country cases, active, recovered and deaths
 
-![Screenshot main page](./assets/sc1.png)
-![Screenshot main page](./assets/sc2.png)
+<img width="200" alt="portfolio_view" src="./assets/sc1.png">
+<img width="200" alt="portfolio_view" src="./assets/sc2.png">
 
 Thank you for api
 `https://github.com/OssamaRafique/Corona-Statistics-And-Tracker-Dashboard-Angular-9`
