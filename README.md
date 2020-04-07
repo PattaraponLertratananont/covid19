@@ -1,8 +1,13 @@
-## Application for monitor COVID-19
+# Application for monitor COVID-19 (Flutter)
 
-**Application developed in Thailand langauge by Student of Thailand**
+*Application developed in Thailand langauge by Student of Thailand*
 
-# Feature
+## Download
+Now Android only
+
+Download [Click (apk)](http://bit.ly/app-covid19-thailand) , Server is google drive, not have virus
+
+## Feature
 - Global Status cases, active, recovered and deaths
 - Thailand Status cases, active, recovered and deaths
 - Ranking Status cases, active, recovered and deaths
