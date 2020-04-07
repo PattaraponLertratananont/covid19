@@ -37,6 +37,10 @@ class _RankingState extends State<Ranking> {
                     fontSize: MediaQuery.of(context).size.width / 23,
                   ),
                 ),
+                highlightColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                splashColor: Colors.transparent,
+                hoverColor: Colors.transparent,
                 onTap: () {},
               ),
               InkWell(
@@ -49,7 +53,7 @@ class _RankingState extends State<Ranking> {
                 ),
                 highlightColor: Colors.transparent,
                 focusColor: Colors.transparent,
-                // splashColor: Colors.transparent,
+                splashColor: Colors.transparent,
                 hoverColor: Colors.transparent,
                 borderRadius: BorderRadius.circular(10),
                 onTap: () {

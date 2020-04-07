@@ -42,6 +42,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   TextEditingController searchController = new TextEditingController();
 
+  String typeFetch;
+  String typeHeadFetch;
   List dataCovid = [];
   List rankCovid = [];
   List thailandCovid = [];
@@ -55,10 +57,12 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     initializeDateFormatting();
-    fetchData();
+    typeFetch = 'cases';
+    typeHeadFetch = 'ติดเชื้อ';
+    fetchData(typeFetch);
   }
 
-  fetchData() {
+  fetchData(String type) {
     dataCovid.clear();
     rankCovid.clear();
     thailandCovid.clear();
@@ -73,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
         dataCovid = value;
       }),
     );
-    getSort('cases').then(
+    getSort(type).then(
       (value) => setState(() {
         rankCovid = value;
         getCountryCovid();
@@ -153,7 +157,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     icon: Icon(Icons.refresh),
                     onPressed: () {
                       setState(() {
-                        fetchData();
+                        fetchData(typeFetch);
                       });
                     },
                   )
@@ -232,10 +236,280 @@ class _MyHomePageState extends State<MyHomePage> {
                     thailandCovid: thailandCovid,
                     thailandTimeline: thailandTimeline,
                   ),
-                  Ranking(
-                    dataCovid: dataCovid,
-                    dataTimeAll: dataTimeAll,
-                    rankCovid: rankCovid,
+                  // Ranking(
+                  //   dataCovid: dataCovid,
+                  //   dataTimeAll: dataTimeAll,
+                  //   rankCovid: rankCovid,
+                  // ),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    margin: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.width * 0.03,
+                      bottom: MediaQuery.of(context).size.width * 0.03,
+                      left: MediaQuery.of(context).size.width * 0.03,
+                      right: MediaQuery.of(context).size.width * 0.03,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        InkWell(
+                          child: Row(
+                            children: [
+                              Text(
+                                'อันดับประเทศ' + typeHeadFetch + 'สูงสุด',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: MediaQuery.of(context).size.width / 23,
+                                ),
+                              ),
+                              Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.white,
+                              )
+                            ],
+                          ),
+                          highlightColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          splashColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          onTap: () {
+                            showModalBottomSheet(
+                                enableDrag: false,
+                                context: context,
+                                backgroundColor: cl_base2,
+                                builder: (BuildContext context) {
+                                  return Container(
+                                    height: MediaQuery.of(context).size.height * 0.36,
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          color: cl_base1,
+                                          child: ListTile(
+                                            title: Text(
+                                              'เลือกประเภทของการแสดงอันดับ',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: MediaQuery.of(context).size.width / 23,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          child: ListTile(
+                                            title: Text(
+                                              'ผู้ติดเชื้อ',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: MediaQuery.of(context).size.width / 23,
+                                              ),
+                                            ),
+                                            onTap: () {
+                                              setState(() {
+                                                typeFetch = 'cases';
+                                                typeHeadFetch = 'ติดเชื้อ';
+                                                fetchData(typeFetch);
+                                                Navigator.of(context).pop();
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                        Container(
+                                          child: ListTile(
+                                            title: Text(
+                                              'รักษาตัว',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: MediaQuery.of(context).size.width / 23,
+                                              ),
+                                            ),
+                                            onTap: () {
+                                              setState(() {
+                                                typeFetch = 'active';
+                                                typeHeadFetch = 'รักษาตัว';
+                                                fetchData(typeFetch);
+                                                Navigator.of(context).pop();
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                        Container(
+                                          child: ListTile(
+                                            title: Text(
+                                              'รักษาหาย',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: MediaQuery.of(context).size.width / 23,
+                                              ),
+                                            ),
+                                            onTap: () {
+                                              setState(() {
+                                                typeFetch = 'recovered';
+                                                typeHeadFetch = 'รักษาหาย';
+                                                fetchData(typeFetch);
+                                                Navigator.of(context).pop();
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                        Container(
+                                          color: cl_base2,
+                                          child: ListTile(
+                                            title: Text(
+                                              'เสียชีวิต',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: MediaQuery.of(context).size.width / 23,
+                                              ),
+                                            ),
+                                            onTap: () {
+                                              setState(() {
+                                                typeFetch = 'deaths';
+                                                typeHeadFetch = 'เสียชีวิต';
+                                                fetchData(typeFetch);
+                                                Navigator.of(context).pop();
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                });
+                          },
+                        ),
+                        InkWell(
+                          child: Text(
+                            'เพิ่มเติม',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: MediaQuery.of(context).size.width / 27,
+                            ),
+                          ),
+                          highlightColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          splashColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          borderRadius: BorderRadius.circular(10),
+                          onTap: () {
+                            dataCovid.isNotEmpty && rankCovid.isNotEmpty && dataTimeAll.isNotEmpty
+                                ? showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return Container(
+                                        child: AlertDialog(
+                                            backgroundColor: cl_base1,
+                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                            title: Container(
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                'อันดับประเทศ' + typeHeadFetch + 'สูงสุด',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: MediaQuery.of(context).size.width / 23,
+                                                ),
+                                              ),
+                                            ),
+                                            content: Container(
+                                              height: MediaQuery.of(context).size.height * 0.6,
+                                              width: MediaQuery.of(context).size.width,
+                                              child: ListView.builder(
+                                                itemCount: rankCovid[0].length,
+                                                itemBuilder: (BuildContext context, int i) {
+                                                  return Container(
+                                                    child: Card(
+                                                      color: cl_base2,
+                                                      child: ListTile(
+                                                        leading: Text(
+                                                          (i + 1).toString(),
+                                                          style: TextStyle(color: Colors.white, fontSize: MediaQuery.of(context).size.width / 23),
+                                                        ),
+                                                        title: Text(
+                                                          rankCovid.isEmpty ? 'ประเทศ' : rankCovid[0][i]['country'].toString(),
+                                                          style: TextStyle(color: Colors.white, fontSize: MediaQuery.of(context).size.width / 23),
+                                                        ),
+                                                        trailing: Text(
+                                                          rankCovid.isEmpty ? '0' : numFormat.format(rankCovid[0][i]['cases']).toString(),
+                                                          style: TextStyle(color: Colors.white, fontSize: MediaQuery.of(context).size.width / 23),
+                                                        ),
+                                                        onTap: () {
+                                                          // Navigator.of(context).pop();
+                                                          showDetail(context, rankCovid[0][i], dataTimeAll);
+                                                        },
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            )),
+                                      );
+                                    })
+                                : print('wait');
+                          },
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.height / 4,
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          child: Card(
+                            color: cl_base2,
+                            child: ListTile(
+                              title: Text(
+                                rankCovid.isEmpty ? 'ประเทศ' : rankCovid[0][0]['country'].toString(),
+                                style: TextStyle(color: Colors.white, fontSize: MediaQuery.of(context).size.width / 20),
+                              ),
+                              trailing: Text(
+                                rankCovid.isEmpty ? '0' : numFormat.format(rankCovid[0][0]['cases']).toString(),
+                                style: TextStyle(color: Colors.white, fontSize: MediaQuery.of(context).size.width / 20),
+                              ),
+                              onTap: () {
+                                rankCovid.isEmpty ? print('wait') : showDetail(context, rankCovid[0][0], dataTimeAll);
+                              },
+                            ),
+                          ),
+                        ),
+                        Container(
+                          child: Card(
+                            color: cl_base2,
+                            child: ListTile(
+                              title: Text(
+                                rankCovid.isEmpty ? 'ประเทศ' : rankCovid[0][1]['country'].toString(),
+                                style: TextStyle(color: Colors.white, fontSize: MediaQuery.of(context).size.width / 20),
+                              ),
+                              trailing: Text(
+                                rankCovid.isEmpty ? '0' : numFormat.format(rankCovid[0][1]['cases']).toString(),
+                                style: TextStyle(color: Colors.white, fontSize: MediaQuery.of(context).size.width / 20),
+                              ),
+                              onTap: () {
+                                rankCovid.isEmpty ? print('wait') : showDetail(context, rankCovid[0][1], dataTimeAll);
+                              },
+                            ),
+                          ),
+                        ),
+                        Container(
+                          child: Card(
+                            color: cl_base2,
+                            child: ListTile(
+                              title: Text(
+                                rankCovid.isEmpty ? 'ประเทศ' : rankCovid[0][2]['country'].toString(),
+                                style: TextStyle(color: Colors.white, fontSize: MediaQuery.of(context).size.width / 20),
+                              ),
+                              trailing: Text(
+                                rankCovid.isEmpty ? '0' : numFormat.format(rankCovid[0][2]['cases']).toString(),
+                                style: TextStyle(color: Colors.white, fontSize: MediaQuery.of(context).size.width / 20),
+                              ),
+                              onTap: () {
+                                rankCovid.isEmpty ? print('wait') : showDetail(context, rankCovid[0][2], dataTimeAll);
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
