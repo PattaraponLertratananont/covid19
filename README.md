@@ -1,16 +1,15 @@
-# covid19
+## Application for monitor COVID-19
 
-A new Flutter project.
+**Application developed in Thailand langauge by Student of Thailand**
 
-## Getting Started
+# Feature
+- Global Status cases, active, recovered and deaths
+- Thailand Status cases, active, recovered and deaths
+- Ranking Status cases, active, recovered and deaths
+- Search country cases, active, recovered and deaths
 
-This project is a starting point for a Flutter application.
+![Screenshot main page](./assets/sc1.png)
+![Screenshot main page](./assets/sc2.png)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Thank you for api
+`https://github.com/OssamaRafique/Corona-Statistics-And-Tracker-Dashboard-Angular-9`
